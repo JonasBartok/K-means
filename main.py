@@ -28,6 +28,8 @@ class KMeans:
                 self.cluster_positions.append(self.clusters_position_counter)
             self.clusters_position_counter += 1
 
+            self._cluster_positions = self.cluster_positions
+
 
 
     def calculate_distance(self):
@@ -58,7 +60,7 @@ class KMeans:
 
             self.a = None
             for x in range(len(self.data)):
-                for m in range(len(self.cluster_positions)):
+                for m in range(len(self._cluster_positions)):
                     self.mainlist[x].append(abs(self.cluster_positions[m] - x))
 
             counter = 0
@@ -73,17 +75,18 @@ class KMeans:
 
 
     def find_smallest_number_in_lists(self):
-        self.smallest_number: int = 0
-        self.smallest_number_index: int = 0
+        self.smallest_number: float = 0
+        self.smallest_number_index: float = 0
         self.smallest_number_list: list = []
 
+        global mainlist2
         self.mainlist2: list = []
-        for p in range(len(self.cluster_positions)):
+        for p in range(len(self._cluster_positions)):
             self.mainlist2.append([])
 
 
         for lists in self.mainlist:
-            self.smallest_number = min(lists)
+            self.smallest_number = float(min(lists))
             self.smallest_number_index = lists.index(self.smallest_number)
 
             self.mainlist2[self.smallest_number_index].append(self.smallest_number)
@@ -97,7 +100,7 @@ class KMeans:
 
         for lists in self.mainlist2:
             try:
-                average.append(round(sum(lists) / len(lists)))
+                average.append(float(sum(lists) / len(lists)))
             except ZeroDivisionError:
                 average.append(0)
 
@@ -107,24 +110,29 @@ class KMeans:
             print(f"average: {sum(average) / len(average)}")
             print(f"mainlist: {self.mainlist2}")
             exit()
-        else:
-            print(f"average: {average}")
-            print(f"average: {sum(average) / len(average)}")
-            print(f"mainlist: {self.mainlist2}")
-            exit()
+
+        self.average: list = average
 
         self.cluster_positions = average
 
         #print(f"average: {self.cluster_positions}")
 
+    def exit_with_error(self):
+        print(f"average: {self.average}")
+        print(f"average: {sum(self.average) / len(self.average)}")
+        print(f"mainlist: {self.mainlist2}")
+        exit()
 
-K = KMeans(k=10, data=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"])
+
+K = KMeans(k=7, data=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"])
 K.random_clusters()
 K.get_cluster_positions()
-for _ in range(100):
+for _ in range(10000):
     K.calculate_distance()
     K.find_smallest_number_in_lists()
     K.calculate_mean()
+K.exit_with_error()
+
 
 
 
