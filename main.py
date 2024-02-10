@@ -72,7 +72,6 @@ class KMeans:
         #print(f"The main list: {self.mainlist}")
 
 
-
     def find_smallest_number_in_lists(self):
         self.smallest_number: int = 0
         self.smallest_number_index: int = 0
