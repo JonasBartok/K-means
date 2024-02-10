@@ -118,18 +118,6 @@ class KMeans:
         #print(f"average: {self.cluster_positions}")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 K = KMeans(k=10, data=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"])
 K.random_clusters()
 K.get_cluster_positions()
