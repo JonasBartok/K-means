@@ -123,15 +123,23 @@ class KMeans:
         print(f"mainlist: {self.mainlist2}")
         exit()
 
+def main():
+    clusters = int(input("Enter the number of clusters: "))
+    data = input("Enter the data: ").split()
+    k = KMeans(k=clusters,
+               data=data)
+    k.random_clusters()
+    k.get_cluster_positions()
+    for _ in range(10000):
+        k.calculate_distance()
+        k.find_smallest_number_in_lists()
+        k.calculate_mean()
+    k.exit_with_error()
 
-K = KMeans(k=7, data=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"])
-K.random_clusters()
-K.get_cluster_positions()
-for _ in range(10000):
-    K.calculate_distance()
-    K.find_smallest_number_in_lists()
-    K.calculate_mean()
-K.exit_with_error()
+
+if __name__ == "__main__":
+    main()
+
 
 
 
