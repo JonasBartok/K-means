@@ -16,7 +16,7 @@ def main():
     #creat centroids
     K = 3
     centroids = make_centroids(K, data)
-    plt.scatter(centroids[:,0],centroids[:,1],c='r',s=100)
+    plt.scatter(centroids[:,0],centroids[:,1],c='black',s=100)
 
     distances: list = []
     for x in data:
@@ -27,9 +27,11 @@ def main():
 
 
 
-    #find_minimnum_distance(distances)
+    updtate_color_of_data(distances)
 
     plt.show()
+
+    print(plots_by_color)
 
 
 def make_centroids(k, data):
@@ -41,32 +43,25 @@ def make_centroids(k, data):
 def distance(x,y):
     return np.linalg.norm(x-y)
 
-
-# def find_minimnum_distance(distances):
-#     index = []
-#     for element in distances:
-#         if element.index(min(element)) == 0:
-#             plt.pcolor(data[:,0],data[:,1], color='r')
-#         if element.index(min(element)) == 1:
-#             plt.annotate(data[:,0],data[:,1], color='g')
-#         if element.index(min(element)) == 2:
-#             plt.annotate(data[:,0],data[:,1], color='b')
-#             plt
-        #index.append(element.index(min(element)))
-
-    #print(index)
-
 def updtate_color_of_data(distances):
+    counter = 0
     for element in distances:
-        plt.scatter(data[:,0],data[:,1], color=find_minimnum_distance(element))
+        plt.scatter(data[counter][0],data[counter][1], color=find_minimnum_distance(element))
+        counter = counter + 1
 
-def find_minimnum_distance(distances, element):
+def find_minimnum_distance(element):
+    global plots_by_color
+    plots_by_color = [[], [], []]
     if element.index(min(element)) == 0:
+        plots_by_color[0].append(element)
         return ['r']
     if element.index(min(element)) == 1:
+        plots_by_color[1].append(element)
         return ['g']
     if element.index(min(element)) == 2:
+        plots_by_color[2].append(element)
         return ['b']
+
 
 
 
