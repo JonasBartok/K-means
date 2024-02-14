@@ -5,13 +5,11 @@ from sklearn.datasets import make_blobs
 
 def main():
     global data
-    np.random.seed(1)
 
     #create data
     blobs = make_blobs(n_samples=50, n_features=2, centers=3)
     data = blobs[0]
 
-    plt.scatter(data[:,0],data[:,1])
 
     #creat centroids
     K = ask_for_number_of_clusters()
